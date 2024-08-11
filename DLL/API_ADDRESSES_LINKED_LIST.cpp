@@ -88,6 +88,23 @@ extern "C" {
 
 	}
 
+	PAPI_LIST match_original_API_address_and_Hook_API_address(PUCHAR Give_me_Hook_API_Address) {
+		if (external_API_LIST_start_address == NULL) return NULL;
+
+		PAPI_LIST current = external_API_LIST_start_address;
+		while (current != NULL) {
+
+			if (current->HOOK_info.Hooked_API_ADDRESS == (PUCHAR)Give_me_Hook_API_Address) {
+				printf("후크 일치 if(  오리지널( %s  %p ) == 후크함수주소( %p) )", current->API_NAME, current->API_ADDRESS,Give_me_Hook_API_Address);
+				return current;
+			}
+
+			current = (PAPI_LIST)current->NEXT_ADDR;
+		}
+		
+		return NULL;
+	}
+
 #ifdef __cplusplus
 	}
 #endif

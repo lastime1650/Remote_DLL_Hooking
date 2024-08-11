@@ -8,6 +8,8 @@ extern "C" {
 
 	DWORD WINAPI START_INIT(PVOID none) {
 
+        printf("시작\n");
+
         // 미리 준비된 API - DLL 매핑하여 주소 얻기를 연결리스트로 가져오도록 함
         PAPI_LIST NODE = LOAD_API_ADDRESSES();
         if (NODE == NULL)

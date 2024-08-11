@@ -10,17 +10,15 @@ extern "C" {
 
 	UCHAR DLL_NAMES[][128] = {
 		"user32.dll",
-	"kernel32.dll"
+		"kernel32.dll"
 	
 	};
 
 	UCHAR API_NAMES[][128] = {
-		"MessageBoxA",
-		"CreateFileA",
-		"ReadFile",
-		"WriteFile"
+		"MessageBoxA"
 	};
 
+	// 아래 값은, API_NAMES 와 일치한 후크함수로 저장되어야함
 	PVOID HOOK_API_ADDRESS[] = {
 		HookedMessageBoxA
 	};
@@ -32,7 +30,7 @@ extern "C" {
 		PAPI_LIST Start_NODE = NULL;
 		PAPI_LIST Current_NODE = NULL;
 
-
+		// API_NAMES API[0] 인덱스부터 차례대로 주소를 찾도록 한다.  
 		for (ULONG32 i = 0; i < (sizeof(API_NAMES) / sizeof(API_NAMES[0])); i++) {
 
 			printf("API_NAMES[%d] = %s  / %d \n", i, API_NAMES[i], (sizeof(API_NAMES) / sizeof(API_NAMES[0])));

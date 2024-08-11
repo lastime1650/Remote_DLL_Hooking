@@ -6,7 +6,7 @@
 #include <cstdlib>
 
 #include "Get_API_Addresses.h"
-#include "Start_64bit_Hook.h"
+#include "Start_Hook.h"
 
 #ifdef __cplusplus
 extern "C" {

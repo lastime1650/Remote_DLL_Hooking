@@ -5,7 +5,9 @@
 #include <Windows.h>
 #include <cstdlib>
 #include "API_ADDRESSES_LINKED_LIST.h"
-#include "Start_64bit_Hook.h"
+#include "Start_Hook.h"
+
+#include "Hooked_IOCTL.h"
 
 #ifdef __cplusplus
 extern "C" {

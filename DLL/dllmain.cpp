@@ -22,7 +22,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
             CloseHandle(Thread_HANDLE);
         }
         
-        
-    }
+   }
     return TRUE;
 }
