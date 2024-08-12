@@ -23,12 +23,29 @@ int WINAPI HookedMessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uT
 
 	printf("후크시작-중\n");
 
-	int OUTPUT = MessageBoxA(hWnd, "Hooked Message", lpCaption, uType);
+	int OUTPUT = MessageBoxA(hWnd, lpText, lpCaption, uType);
 
 
 	HOOK_IOCTL_DATA DATA = { 0, };
 	DATA.PID = (HANDLE)GetCurrentProcessId();
 	memcpy(DATA.Hooked_API_NAME, NAME, sizeof(NAME));
+
+	// 파라미터 동적할당
+	DATA.Start_Address = NULL;
+
+	PHOOK_API_Parameters tmp_START_ADDR = NULL;
+
+	
+	DATA.Start_Address = ALL_in_One_HOOK_API_Parm_MAKE_NODE(&tmp_START_ADDR, (PUCHAR)&hWnd, sizeof(hWnd));
+	printf("1 -> %p \n", tmp_START_ADDR);
+	DATA.Start_Address = ALL_in_One_HOOK_API_Parm_MAKE_NODE(&tmp_START_ADDR, (PUCHAR)lpText, strlen(lpText)+1 );
+	printf("2 -> %p \n", tmp_START_ADDR);
+	DATA.Start_Address = ALL_in_One_HOOK_API_Parm_MAKE_NODE(&tmp_START_ADDR, (PUCHAR)lpCaption, strlen(lpCaption)+1 );
+	printf("3 -> %p \n", tmp_START_ADDR);
+	DATA.Start_Address = ALL_in_One_HOOK_API_Parm_MAKE_NODE(&tmp_START_ADDR, (PUCHAR)&uType, sizeof(uType));
+	printf("4 -> %p \n", tmp_START_ADDR);
+	
+
 	SEND_IOCTL(&DATA);
 	//HANDLE Thread_HANDLE = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)SEND_IOCTL, &DATA, 0, NULL);
 	//CloseHandle(Thread_HANDLE);

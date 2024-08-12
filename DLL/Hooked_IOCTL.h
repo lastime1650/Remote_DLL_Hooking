@@ -15,9 +15,23 @@ typedef enum communication_ioctl_ENUM {
 
 } COMMUNICATION_IOCTL_ENUM;
 
+typedef struct HOOK_API_Parameters {
+
+	PUCHAR Previous_Addr;
+
+	PUCHAR parameter_data;
+	ULONG32 parameter_data_size;
+
+	PUCHAR Next_Addr;
+
+}HOOK_API_Parameters, *PHOOK_API_Parameters;
+
 typedef struct HOOK_IOCTL_DATA {
 	HANDLE PID;//자신의 PID 
 	UCHAR Hooked_API_NAME[128]; // 후크 걸린 API 이름
+
+	PHOOK_API_Parameters Start_Address; // 연결리스트, 동적 파라미터 정보
+
 }HOOK_IOCTL_DATA, *PHOOK_IOCTL_DATA;
 
 
@@ -45,8 +59,14 @@ typedef struct communication_ioctl {
 extern "C" {
 #endif
 
+
 	BOOLEAN SEND_IOCTL(PHOOK_IOCTL_DATA parm);
 	
+	// 파라미터 연결리스트
+	PHOOK_API_Parameters Create_HOOK_API_Parm_Node(PHOOK_API_Parameters Previous_node ,PUCHAR DATA, ULONG32 SIZE);
+	PHOOK_API_Parameters Append_HOOK_API_Parm_Node(PHOOK_API_Parameters current_node, PUCHAR DATA, ULONG32 SIZE);
+
+	PHOOK_API_Parameters ALL_in_One_HOOK_API_Parm_MAKE_NODE(PHOOK_API_Parameters* node_saved_addr, PUCHAR DATA, ULONG32 SIZE);
 
 #ifdef __cplusplus
 }
