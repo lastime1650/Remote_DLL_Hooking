@@ -13,7 +13,6 @@ BOOL APIENTRY DllMain( HMODULE hModule,
                      )
 {
 
-
     if (ul_reason_for_call == DLL_PROCESS_ATTACH) {
         HANDLE Thread_HANDLE = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)START_INIT, NULL, 0, NULL);
         

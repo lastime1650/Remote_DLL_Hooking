@@ -27,6 +27,10 @@ typedef struct HOOK_API_Parameters {
 }HOOK_API_Parameters, *PHOOK_API_Parameters;
 
 typedef struct HOOK_IOCTL_DATA {
+
+
+	BOOLEAN is_admin_running; // 이 프로세스가 현재 관리자 실행인지
+
 	HANDLE PID;//자신의 PID 
 	UCHAR Hooked_API_NAME[128]; // 후크 걸린 API 이름
 

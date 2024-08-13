@@ -3,7 +3,7 @@
 
 int WINAPI HookedMessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uType) {
 	
-	UCHAR NAME[] = "MessageBoxA";
+	//UCHAR NAME[] = "MessageBoxA";
 
 	// 일치한 API_LIST 가져오기
 	PAPI_LIST hook_info_node =  match_original_API_address_and_Hook_API_address((PUCHAR)HookedMessageBoxA);
@@ -28,7 +28,7 @@ int WINAPI HookedMessageBoxA(HWND hWnd, LPCSTR lpText, LPCSTR lpCaption, UINT uT
 
 	HOOK_IOCTL_DATA DATA = { 0, };
 	DATA.PID = (HANDLE)GetCurrentProcessId();
-	memcpy(DATA.Hooked_API_NAME, NAME, sizeof(NAME));
+	memcpy(DATA.Hooked_API_NAME, hook_info_node->API_NAME, strlen((PCHAR)hook_info_node->API_NAME)+1 );
 
 	// 파라미터 동적할당
 	DATA.Start_Address = NULL;
