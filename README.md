@@ -21,3 +21,65 @@ DLL 파트만 유심히 보면 될 것 같습니다.
 이제 후크된 API는 커널 IOCTL요청을 할 수 있어, 로깅이 가능합니다.
 
 
+# 정의된 함수들 
+
+"MessageBoxA",
+"BitBlt",
+
+
+// 원격 프로세스
+
+"CreateRemoteThread",
+"CreateProcessA",
+"CreateProcessW",
+"OpenProcess",
+"TerminateProcess",
+"ResumeThread",
+"SuspendThread",
+
+// 메모리 조작
+
+"ReadProcessMemory",
+"WriteProcessMemory",
+"VirtualAllocEx",
+"VirtualFreeEx",
+
+// 핸들 조작
+
+"DuplicateHandle",
+"GetThreadContext",
+"SetThreadContext",
+
+// 프로세스 및 스레드 보안
+
+"AdjustTokenPrivileges",
+"OpenProcessToken",
+
+// 데이터 복사 및 파일 조작
+
+"NtReadFile",
+"NtWriteFile",
+"NtQueryInformationFile",
+"CreateFileA",
+"CreateFileW",
+"ReadFile",
+"WriteFile",
+
+// 기타
+
+"SetWindowsHookEx",
+"SendMessage",
+"PostMessage",
+
+// Basic API
+
+"malloc",
+"calloc",
+"realloc",
+"free",
+"fopen",
+"fclose",
+"fread",
+"fwrite",
+"exit",
+"abort"
